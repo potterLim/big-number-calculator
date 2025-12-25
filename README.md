@@ -33,7 +33,7 @@ public class BigNumberCalculator {
         return false;
     }
 
-    public static String normalizeDecimalOrNull(String num) {
+    public static String normalizeSignedIntegerOrNull(String num) {
         return null;
     }
 
@@ -86,7 +86,7 @@ BigNumberCalculator.isValidSignedInteger("0xFF");          // false
 BigNumberCalculator.isValidSignedInteger("0b1010");        // false
 ```
 
-### 2.2. `normalizeDecimalOrNull()` 정적 함수를 구현한다
+### 2.2. `normalizeSignedIntegerOrNull()` 정적 함수를 구현한다
 
 - 이 함수는 필수 구현 함수가 아니지만 입력 문자열을 검증하고 전처리하기 위한 도움 함수(Helper Function)로 사용하면 구현을 훨씬 안전하고 단순하게 만들 수 있다.
 
@@ -109,27 +109,27 @@ BigNumberCalculator.isValidSignedInteger("0b1010");        // false
       _예: `"0" → "0"`, `"0000" → "0"`, `"-0" → "0"`, `"-0000" → "0"`_
 
 ```java
-BigNumberCalculator.normalizeDecimalOrNull(null);            // null
-BigNumberCalculator.normalizeDecimalOrNull("");              // null
-BigNumberCalculator.normalizeDecimalOrNull("-");             // null
-BigNumberCalculator.normalizeDecimalOrNull("   ");           // null
+BigNumberCalculator.normalizeSignedIntegerOrNull(null);            // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("");              // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("-");             // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("   ");           // null
 
-BigNumberCalculator.normalizeDecimalOrNull("0");             // "0"
-BigNumberCalculator.normalizeDecimalOrNull("0000");          // "0"
-BigNumberCalculator.normalizeDecimalOrNull("-0");            // "0"
-BigNumberCalculator.normalizeDecimalOrNull("-0000");         // "0"
+BigNumberCalculator.normalizeSignedIntegerOrNull("0");             // "0"
+BigNumberCalculator.normalizeSignedIntegerOrNull("0000");          // "0"
+BigNumberCalculator.normalizeSignedIntegerOrNull("-0");            // "0"
+BigNumberCalculator.normalizeSignedIntegerOrNull("-0000");         // "0"
 
-BigNumberCalculator.normalizeDecimalOrNull("000123");        // "123"
-BigNumberCalculator.normalizeDecimalOrNull("-00000000007");  // "-7"
-BigNumberCalculator.normalizeDecimalOrNull("159");           // "159"
-BigNumberCalculator.normalizeDecimalOrNull("-00120");        // "-120"
+BigNumberCalculator.normalizeSignedIntegerOrNull("000123");        // "123"
+BigNumberCalculator.normalizeSignedIntegerOrNull("-00000000007");  // "-7"
+BigNumberCalculator.normalizeSignedIntegerOrNull("159");           // "159"
+BigNumberCalculator.normalizeSignedIntegerOrNull("-00120");        // "-120"
 
-BigNumberCalculator.normalizeDecimalOrNull("+12");           // null
-BigNumberCalculator.normalizeDecimalOrNull("12.3");          // null
-BigNumberCalculator.normalizeDecimalOrNull("1e5");           // null
-BigNumberCalculator.normalizeDecimalOrNull("12a3");          // null
-BigNumberCalculator.normalizeDecimalOrNull("0xFF");          // null
-BigNumberCalculator.normalizeDecimalOrNull("0b1010");        // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("+12");           // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("12.3");          // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("1e5");           // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("12a3");          // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("0xFF");          // null
+BigNumberCalculator.normalizeSignedIntegerOrNull("0b1010");        // null
 ```
 
 ### 2.3. `addOrNull()` 정적 함수를 구현한다
