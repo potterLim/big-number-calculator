@@ -28,9 +28,8 @@
 1. IntelliJ에서 `BigNumberCalculator` 프로젝트를 생성한다.
 2. 프로젝트에 `BigNumberCalculator.java` 파일을 추가한다.
 ```java
-public class BigNumberCalculator
-{
-    public static boolean isValidDecimal(String num) {
+public class BigNumberCalculator {
+    public static boolean isValidSignedInteger(String num) {
         return false;
     }
 
@@ -50,7 +49,7 @@ public class BigNumberCalculator
 
 ## 2. `BigNumberCalculator` 클래스를 구현한다
 
-### 2.1. `isValidDecimal()` 정적 함수를 구현한다
+### 2.1. `isValidSignedInteger()` 정적 함수를 구현한다
 
 - 이 함수는 필수 구현 함수가 아니지만 입력 문자열을 검증하고 전처리하기 위한 도움 함수(Helper Function)로 사용하면 구현을 훨씬 안전하고 단순하게 만들 수 있다.
 
@@ -67,24 +66,24 @@ public class BigNumberCalculator
     - 선행 0(예: `"000123"`, `"-0007"`)은 허용한다.
 
 ```java
-BigNumberCalculator.isValidDecimal(null);            // false
-BigNumberCalculator.isValidDecimal("");              // false
-BigNumberCalculator.isValidDecimal("-");             // false
-BigNumberCalculator.isValidDecimal("   ");           // false
+BigNumberCalculator.isValidSignedInteger(null);            // false
+BigNumberCalculator.isValidSignedInteger("");              // false
+BigNumberCalculator.isValidSignedInteger("-");             // false
+BigNumberCalculator.isValidSignedInteger("   ");           // false
 
-BigNumberCalculator.isValidDecimal("159");           // true
-BigNumberCalculator.isValidDecimal("-00000000007");  // true
-BigNumberCalculator.isValidDecimal("000123");        // true
-BigNumberCalculator.isValidDecimal("0");             // true
-BigNumberCalculator.isValidDecimal("-0");            // true
-BigNumberCalculator.isValidDecimal("00000");         // true
+BigNumberCalculator.isValidSignedInteger("159");           // true
+BigNumberCalculator.isValidSignedInteger("-00000000007");  // true
+BigNumberCalculator.isValidSignedInteger("000123");        // true
+BigNumberCalculator.isValidSignedInteger("0");             // true
+BigNumberCalculator.isValidSignedInteger("-0");            // true
+BigNumberCalculator.isValidSignedInteger("00000");         // true
 
-BigNumberCalculator.isValidDecimal("+12");           // false
-BigNumberCalculator.isValidDecimal("12.3");          // false
-BigNumberCalculator.isValidDecimal("1e5");           // false
-BigNumberCalculator.isValidDecimal("12a3");          // false
-BigNumberCalculator.isValidDecimal("0xFF");          // false
-BigNumberCalculator.isValidDecimal("0b1010");        // false
+BigNumberCalculator.isValidSignedInteger("+12");           // false
+BigNumberCalculator.isValidSignedInteger("12.3");          // false
+BigNumberCalculator.isValidSignedInteger("1e5");           // false
+BigNumberCalculator.isValidSignedInteger("12a3");          // false
+BigNumberCalculator.isValidSignedInteger("0xFF");          // false
+BigNumberCalculator.isValidSignedInteger("0b1010");        // false
 ```
 
 ### 2.2. `normalizeDecimalOrNull()` 정적 함수를 구현한다
