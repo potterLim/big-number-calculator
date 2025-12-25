@@ -1,10 +1,10 @@
-# BigNumberCalculator 과제 
+# BigNumberCalculator 실습 
 
 `int`(32비트 정수형)와 `long`(64비트 정수형)은 매우 큰 정수 값을 표현하고 연산하기에 적합하지 않다. 덧셈이나 뺄셈과 같은 기본 연산에서도 오버플로 또는 언더플로가 발생할 수 있으며 특히 값의 범위가 `2^63 - 1`을 초과하는 경우에는 표준 정수형으로는 표현 자체가 불가능하다.  
 `double`과 같은 부동소수점 자료형을 사용할 수도 있으나 이는 근본적으로 오차를 포함할 수 있으므로 정확한 정수 연산이 요구되는 상황에는 적합하지 않다.
 
-이 과제에서는 이러한 한계를 극복하기 위해 매우 큰 정수를 문자열 기반으로 표현하고 처리하는 계산기 BigNumberCalculator를 구현한다.  
-이 과제의 목적은 언어에서 제공하는 내장 큰 정수 자료형에 의존하지 않고 문자열 기반 표현을 통해 매우 큰 정수의 덧셈과 뺄셈을 정확하게 수행할 수 있는 연산 로직을 직접 구현하는 데 있다.
+이 실습에서는 이러한 한계를 극복하기 위해 매우 큰 정수를 문자열 기반으로 표현하고 처리하는 계산기 BigNumberCalculator를 구현한다.  
+이 실습의 목적은 언어에서 제공하는 내장 큰 정수 자료형에 의존하지 않고 문자열 기반 표현을 통해 매우 큰 정수의 덧셈과 뺄셈을 정확하게 수행할 수 있는 연산 로직을 직접 구현하는 데 있다.
 
 ## 전반적인 규칙
 
@@ -23,15 +23,19 @@
     - `-0`은 허용되지 않으며, 이 경우 반드시 `"0"`으로 반환해야 한다.
     - 결과는 수학적으로 정확한 값이어야 한다.
 
-- 과제 명세에서 제공된 함수 시그니처는 수정할 수 없으나 필요에 따라 추가적인 `private` 도움 함수를 작성하는 것은 허용된다.
+- 실습 명세에서 제공된 함수 시그니처는 수정할 수 없으나 필요에 따라 추가적인 `private` 도움 함수를 작성하는 것은 허용된다.
 
 - 필수 요구 사항은 아니지만 `String`을 이용한 반복적인 수정 작업은 불필요한 연산 비용을 유발할 수 있으므로 상황에 따라 보다 효율적인 구현 방법을 고려하는 것이 바람직하다.
 
 ## 1. 프로젝트를 준비한다
 
 1. IntelliJ에서 `BigNumberCalculator` 프로젝트를 생성한다.
-2. 프로젝트에 `BigNumberCalculator.java` 파일을 추가한다.
+2. `bignumbercalculator` 패키지를 생성한다.
+3. `bignumbercalculator`패키지에 `BigNumberCalculator.java` 클래스를 정의한다.
+
 ```java
+package bignumbercalculator;
+
 public class BigNumberCalculator {
     public static String addOrNull(String num1, String num2) {
         return null;
@@ -198,6 +202,8 @@ BigNumberCalculator.subtractOrNull("0b1010", "1");      // null
 ## 3. 본인 컴퓨터에서 테스트
 - 프로젝트의 `Main.java` 파일을 아래의 예처럼 수정한다.
 ```java
+package bignumbercalculator;
+
 public class Main {
     public static void main(String[] args) {
         boolean bPassed;
@@ -612,4 +618,4 @@ public class Main {
     }
 }
 ```
-- `FAIL`이 하나라도 있으면 과제 명세를 다시 꼼꼼히 검토한 후 수정한다.
+- `FAIL`이 하나라도 있으면 실습 명세를 다시 꼼꼼히 검토한 후 수정한다.
