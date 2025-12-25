@@ -8,20 +8,24 @@
 
 ## 전반적인 규칙
 
-- `java.math.BigInteger`를 포함한 모든 Big Integer 관련 라이브러리는 사용할 수 없다.
+- `java.math.BigInteger`를 포함한 모든 Big Integer 관련 라이브러리는 허용되지 않는다.
 
-- `double`, `float`, `BigDecimal` 등 부동소수점 및 고정소수점 자료형은 사용할 수 없다.
+- `double`, `float`, `BigDecimal` 등 부동소수점 및 고정소수점 자료형은 허용되지 않는다.
 
 - 정수 연산을 위해 입력 전체를 `int` 또는 `long`으로 변환하는 방식은 허용되지 않는다.
 
 - 입력되는 정수 문자열은 다음과 같은 형태를 가질 수 있다.
-  - 선행 0을 포함할 수 있다. (예: `"000123"`)
-  - 음수를 나타내기 위해 `-` 기호를 포함할 수 있다. (예: `"-00000000007"`)
+    - 선행 0을 포함할 수 있다. (예: `"000123"`)
+    - 음수를 나타내기 위해 `-` 기호를 포함할 수 있다. (예: `"-00000000007"`)
 
 - 모든 연산의 최종 결과는 정규화된 10진수 정수 문자열로 반환해야 한다.
-  - 선행 0이 없어야 한다.
-  - `-0`은 허용되지 않으며, 이 경우 반드시 `"0"`으로 반환해야 한다.
-  - 결과는 수학적으로 정확한 값이어야 한다.
+    - 선행 0이 없어야 한다.
+    - `-0`은 허용되지 않으며, 이 경우 반드시 `"0"`으로 반환해야 한다.
+    - 결과는 수학적으로 정확한 값이어야 한다.
+
+- 과제 명세에서 제공된 함수 시그니처는 수정할 수 없으나 필요에 따라 추가적인 `private` 도움 함수를 작성하는 것은 허용된다.
+
+- 필수 요구 사항은 아니지만 `String`을 이용한 반복적인 수정 작업은 불필요한 연산 비용을 유발할 수 있으므로 상황에 따라 보다 효율적인 구현 방법을 고려하는 것이 바람직하다.
 
 ## 1. 프로젝트를 준비한다
 
@@ -29,19 +33,19 @@
 2. 프로젝트에 `BigNumberCalculator.java` 파일을 추가한다.
 ```java
 public class BigNumberCalculator {
-    public static boolean isValidSignedInteger(String num) {
-        return false;
-    }
-
-    public static String normalizeSignedIntegerOrNull(String num) {
-        return null;
-    }
-
     public static String addOrNull(String num1, String num2) {
         return null;
     }
 
     public static String subtractOrNull(String num1, String num2) {
+        return null;
+    }
+
+    private static boolean isValidSignedInteger(String num) {
+        return false;
+    }
+
+    private static String normalizeSignedIntegerOrNull(String num) {
         return null;
     }
 }
