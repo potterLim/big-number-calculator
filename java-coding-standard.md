@@ -350,12 +350,12 @@ if (condition) {
 ```java
 // 잘못된 예
 static public void doSomething() {
-    // ...
 }
+
+static private final int RETRY_COUNT = 3;
 
 // 올바른 예
 public static void doSomething() {
-    // ...
 }
 
 private static final int RETRY_COUNT = 3;
