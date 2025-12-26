@@ -31,7 +31,8 @@
 
 1. IntelliJ에서 `BigNumberCalculator` 프로젝트를 생성한다.
 2. `bignumbercalculator` 패키지를 생성한다.
-3. `bignumbercalculator`패키지에 `BigNumberCalculator.java` 클래스를 정의한다.
+3. `bignumbercalculator` 패키지에 `BigNumberCalculator` 클래스를 정의한다.
+3. `bignumbercalculator` 패키지에 `Main` 클래스를 정의한다.
 
 ```java
 package bignumbercalculator;
@@ -200,7 +201,7 @@ BigNumberCalculator.subtractOrNull("0b1010", "1");      // null
 
 
 ## 3. 본인 컴퓨터에서 테스트
-- 프로젝트의 `Main.java` 파일을 아래의 예처럼 수정한다.
+- 프로젝트의 `Main` 클래스를 아래의 예처럼 수정한다.
 ```java
 package bignumbercalculator;
 
