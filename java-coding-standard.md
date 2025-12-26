@@ -15,7 +15,7 @@
 - **변수명과 함수명은 의도와 역할이 명확히 드러나도록 작성한다.**  
    축약어나 임의의 약어보다는 코드의 의도를 바로 이해할 수 있는 이름을 사용한다.
 
-이 코딩 표준은 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)를 기반으로 작성되었으며 실제 개발 환경에서의 가독성과 유지보수성을 고려하여 일부 항목은 필요에 따라 조정되었다.
+이 코딩 표준은 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)를 기반으로 하되 실제 개발 환경에서의 가독성과 유지보수성을 고려하여 일부 항목을 현실적으로 조정하였다.
 
 ## 2. 파일, 패키지, 클래스 구조
 
@@ -94,7 +94,7 @@ public boolean shouldRetry();
 public int calculateSumRecursive(int value);
 ```
 
-### 3.3. 변수 이름
+### 3.3. 변수 이름 규칙
 
 - 변수명은 camelCase를 사용한다.
 - 의미 없는 축약어나 단일 문자 이름은 사용하지 않는다.
@@ -111,7 +111,7 @@ int currentIndex;
 User targetUser;
 ```
 
-### 3.4. 상수
+### 3.4. 상수 이름 규칙
 
 - 상수는 모두 대문자로 작성하며 단어 사이는 언더스코어(`_`)로 구분한다.
 
@@ -230,6 +230,22 @@ private User findByEmailInternal(String email) {
     return userRepository.findByEmail(email);
 }
 ```
+
+### 6.4. @Override 사용 규칙
+
+- 메서드를 오버라이딩할 때는 항상 `@Override` 어노테이션을 명시한다.
+
+```java
+public class CachedRepository extends Repository {
+
+    @Override
+    public User findUserById(long id) {
+        return super.findUserById(id);
+    }
+}
+```
+
+
 ## 7. 제어문 규칙
 
 ### 7.1. 중괄호 사용 규칙
@@ -303,6 +319,8 @@ var message = "Hello, World";
 
 ## 11. 포맷팅 규칙
 
+### 11.1. 들여쓰기 및 중괄호 규칙
+
 - 탭(tab)은 IntelliJ의 기본 설정을 따른다. 다른 편집기를 사용할 경우에는 탭 문자 대신 공백 4칸을 사용한다.
 
 - 중괄호(`{}`)는 새로운 줄에서 열지 않으며 닫는 중괄호(`}`)는 새로운 줄에 위치시킨다.
@@ -325,17 +343,7 @@ if (condition) {
 }
 ```
 
-- 한 줄에 변수 하나만 선언한다.
-
-```java
-// 잘못된 예
-int width = 0, height = 0, depth = 0;
-
-// 올바른 예
-int width = 0;
-int height = 0;
-int depth = 0;
-```
+### 11.2. 제어문 작성 규칙
 
 - 접근제어자(`public`, `protected`, `private`)는 다른 수정자(`static`, `final`, `abstract` 등)보다 앞에 작성한다.
 
@@ -352,6 +360,22 @@ public static void doSomething() {
 
 private static final int RETRY_COUNT = 3;
 ```
+
+### 11.3. 선언 및 배치 규칙
+
+- 한 줄에 변수 하나만 선언한다.
+
+```java
+// 잘못된 예
+int width = 0, height = 0, depth = 0;
+
+// 올바른 예
+int width = 0;
+int height = 0;
+int depth = 0;
+```
+
+### 11.4. 리터럴 표기 규칙
 
 - `double`이 반드시 필요한 경우가 아니라면 `float`을 사용하고 리터럴에 반드시 `f`를 붙인다.
 
@@ -370,16 +394,4 @@ long timeout = 1000l;
 
 // 올바른 예
 long timeout = 1000L;
-```
-
-- 메서드를 오버라이딩할 때는 항상 `@Override` 어노테이션을 명시한다.
-
-```java
-public class CachedRepository extends Repository {
-
-    @Override
-    public User findUserById(long id) {
-        return super.findUserById(id);
-    }
-}
 ```
