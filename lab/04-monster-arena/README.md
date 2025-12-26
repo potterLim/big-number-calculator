@@ -26,6 +26,7 @@
 3. `monsterarena` 패키지에 `ElementType` 열거형(enum)을 정의한다.
 4. `monsterarena` 패키지에 `Monster` 클래스를 정의한다.
 5. `monsterarena` 패키지에 `Arena` 클래스를 정의한다.
+6. `monsterarena` 패키지에 `Main` 클래스를 정의한다.
 
 ## 2. 게임을 구현한다
 
@@ -287,9 +288,9 @@ MonsterArena/
 └─ MonsterArena.iml
 ```
 
-### 3.2. 테스트용 `Main.java`
+### 3.2. 테스트용 `Main` 클래스 수정
 
-- 프로젝트의 Main.java 파일을 아래의 예처럼 수정한다.
+- 프로젝트의 `Main` 클래스를 아래의 예처럼 수정한다.
 
 ```java
 package monsterarena;
