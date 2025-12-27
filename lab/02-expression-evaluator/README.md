@@ -23,10 +23,12 @@
 
 ## 1. 프로젝트를 준비한다
 
-1. IntelliJ에서 `ExpressionEvaluator` 프로젝트를 생성한다.
-2. `expressionevaluator` 패키지를 생성한다.
-3. `expressionevaluator` 패키지에 `ExpressionEvaluator` 클래스를 정의한다.
-4. `expressionevaluator` 패키지에 `Main` 클래스를 정의한다.
+1. IntelliJ에서 `java-labs` 프로젝트를 연다.
+2. `02-expression-evaluator` 디렉터리로 이동한다.
+3. `02-expression-evaluator` 디렉터리 아래에 `src/main/java` 디렉터리를 생성한다.
+4. `src/main/java` 디렉터리 아래에 `com.example.expressionevaluator` 패키지를 생성한다.
+5. `com.example.expressionevaluator` 패키지에 `ExpressionEvaluator` 클래스를 정의한다.
+6. `com.example.expressionevaluator` 패키지에 `Main` 클래스를 정의한다.
 
 ## 2. `ExpressionEvaluator` 클래스를 구현한다
 
@@ -74,10 +76,10 @@ ExpressionEvaluator.evaluateOrNull("2 * * 3");            // null
 
 ## 3. 본인 컴퓨터에서 테스트
 
-- 프로젝트의 `Main` 클래스를 아래의 예처럼 수정한다.
+- `Main` 클래스를 아래의 예처럼 수정하고 실행한다.
 
 ```java
-package expressionevaluator;
+package com.example.expressionevaluator;
 
 public class Main {
     private static int totalChecks = 0;
