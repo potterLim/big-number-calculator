@@ -29,13 +29,15 @@
 
 ## 1. 프로젝트를 준비한다
 
-1. IntelliJ에서 `BigNumberCalculator` 프로젝트를 생성한다.
-2. `bignumbercalculator` 패키지를 생성한다.
-3. `bignumbercalculator` 패키지에 `BigNumberCalculator` 클래스를 정의한다.
-3. `bignumbercalculator` 패키지에 `Main` 클래스를 정의한다.
+1. IntelliJ에서 `java-labs` 프로젝트를 연다.
+2. `01-big-number-calculator` 디렉터리로 이동한다.
+3. `01-big-number-calculator` 디렉터리 아래에 `src/main/java` 디렉터리를 생성한다.
+4. `src/main/java` 디렉터리 아래에 `com.example.bignumber` 패키지를 생성한다.
+5. `com.example.bignumber` 패키지에 `BigNumberCalculator` 클래스를 정의한다.
+6. `com.example.bignumber` 패키지에 `Main` 클래스를 정의한다.
 
 ```java
-package bignumbercalculator;
+package com.example.bignumber;
 
 public class BigNumberCalculator {
     public static String addOrNull(String num1, String num2) {
@@ -201,21 +203,16 @@ BigNumberCalculator.subtractOrNull("0b1010", "1");      // null
 
 
 ## 3. 본인 컴퓨터에서 테스트
-- 프로젝트의 `Main` 클래스를 아래의 예처럼 수정한다.
+
+- `Main` 클래스를 아래의 예처럼 수정하고 실행한다.
+
 ```java
-package bignumbercalculator;
+package com.example.bignumber;
 
 public class Main {
     public static void main(String[] args) {
-        boolean bPassed;
+        boolean bPassed = true;
 
-        // =========================================================
-        // 2.3 addOrNull() — 입력 형식 오류(Invalid Input) 검증
-        // =========================================================
-
-        bPassed = true;
-
-        // null / empty / "-" / whitespace
         bPassed &= (BigNumberCalculator.addOrNull(null, "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", null) == null);
         bPassed &= (BigNumberCalculator.addOrNull("", "1") == null);
@@ -227,13 +224,11 @@ public class Main {
         bPassed &= (BigNumberCalculator.addOrNull("\t", "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "\n") == null);
 
-        // leading/trailing spaces
         bPassed &= (BigNumberCalculator.addOrNull("1 ", "2") == null);
         bPassed &= (BigNumberCalculator.addOrNull(" 1", "2") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "2 ") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", " 2") == null);
 
-        // plus sign / decimal point / exponent / commas
         bPassed &= (BigNumberCalculator.addOrNull("+1", "2") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "+2") == null);
         bPassed &= (BigNumberCalculator.addOrNull("+", "2") == null);
@@ -244,7 +239,6 @@ public class Main {
         bPassed &= (BigNumberCalculator.addOrNull("1,000", "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "1,000") == null);
 
-        // non-decimal prefixes / letters / mixed / misplaced '-'
         bPassed &= (BigNumberCalculator.addOrNull("0xFF", "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "0xFF") == null);
         bPassed &= (BigNumberCalculator.addOrNull("0b1010", "1") == null);
@@ -256,7 +250,6 @@ public class Main {
         bPassed &= (BigNumberCalculator.addOrNull("-01-2", "3") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "--2") == null);
 
-        // unicode digits / full-width digits (must be invalid)
         bPassed &= (BigNumberCalculator.addOrNull("１２３", "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("١٢٣", "1") == null);
         bPassed &= (BigNumberCalculator.addOrNull("1", "１２３") == null);
@@ -267,11 +260,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 입력 형식 오류 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 입력 형식 오류(Invalid Input) 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -312,7 +300,6 @@ public class Main {
         bPassed &= (BigNumberCalculator.subtractOrNull("-01-2", "3") == null);
         bPassed &= (BigNumberCalculator.subtractOrNull("1", "--2") == null);
 
-        // unicode digits / full-width digits (must be invalid)
         bPassed &= (BigNumberCalculator.subtractOrNull("１２３", "1") == null);
         bPassed &= (BigNumberCalculator.subtractOrNull("١٢٣", "1") == null);
         bPassed &= (BigNumberCalculator.subtractOrNull("1", "１２３") == null);
@@ -323,11 +310,6 @@ public class Main {
         } else {
             System.out.println("2.4 subtractOrNull() — 입력 형식 오류 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.3 addOrNull() — 기본 동작 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -340,7 +322,6 @@ public class Main {
         bPassed &= "1000000000000000001".equals(BigNumberCalculator.addOrNull("1", "1000000000000000000"));
         bPassed &= "1000000000000000001".equals(BigNumberCalculator.addOrNull("1000000000000000000", "1"));
 
-        // very different lengths
         bPassed &= "1000000000000000000000001".equals(BigNumberCalculator.addOrNull("1", "1000000000000000000000000"));
         bPassed &= "1000000000000000000000001".equals(BigNumberCalculator.addOrNull("1000000000000000000000000", "1"));
 
@@ -349,11 +330,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 기본 동작 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 기본 동작 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -367,11 +343,9 @@ public class Main {
         bPassed &= "999999999999999999".equals(BigNumberCalculator.subtractOrNull("1000000000000000000", "1"));
         bPassed &= "-999999999999999999".equals(BigNumberCalculator.subtractOrNull("1", "1000000000000000000"));
 
-        // smallest sign-flip
         bPassed &= "-1".equals(BigNumberCalculator.subtractOrNull("1", "2"));
         bPassed &= "1".equals(BigNumberCalculator.subtractOrNull("-1", "-2"));
 
-        // very different lengths
         bPassed &= "999999999999999999999999".equals(BigNumberCalculator.subtractOrNull("1000000000000000000000000", "1"));
         bPassed &= "-999999999999999999999999".equals(BigNumberCalculator.subtractOrNull("1", "1000000000000000000000000"));
 
@@ -380,11 +354,6 @@ public class Main {
         } else {
             System.out.println("2.4 subtractOrNull() — 기본 동작 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.3 addOrNull() — 부호 조합 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -398,7 +367,6 @@ public class Main {
         bPassed &= "-999999999999999999998".equals(BigNumberCalculator.addOrNull("-999999999999999999999", "1"));
         bPassed &= "999999999999999999998".equals(BigNumberCalculator.addOrNull("999999999999999999999", "-1"));
 
-        // zero interactions
         bPassed &= "-1".equals(BigNumberCalculator.addOrNull("0", "-1"));
         bPassed &= "1".equals(BigNumberCalculator.addOrNull("0", "1"));
         bPassed &= "-1".equals(BigNumberCalculator.addOrNull("-1", "0"));
@@ -409,11 +377,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 부호 조합 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 부호 조합 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -427,7 +390,6 @@ public class Main {
         bPassed &= "1000000000000000000000".equals(BigNumberCalculator.subtractOrNull("999999999999999999999", "-1"));
         bPassed &= "-1000000000000000000000".equals(BigNumberCalculator.subtractOrNull("-999999999999999999999", "1"));
 
-        // zero interactions
         bPassed &= "1".equals(BigNumberCalculator.subtractOrNull("0", "-1"));
         bPassed &= "-1".equals(BigNumberCalculator.subtractOrNull("0", "1"));
         bPassed &= "-1".equals(BigNumberCalculator.subtractOrNull("-1", "0"));
@@ -438,11 +400,6 @@ public class Main {
         } else {
             System.out.println("2.4 subtractOrNull() — 부호 조합 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.3 addOrNull() — 정규화(선행 0, -0) 포함 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -458,7 +415,6 @@ public class Main {
         bPassed &= "-1".equals(BigNumberCalculator.addOrNull("0", "-0001"));
         bPassed &= "1".equals(BigNumberCalculator.addOrNull("-0000", "0001"));
 
-        // zero by cancellation with leading zeros
         bPassed &= "0".equals(BigNumberCalculator.addOrNull("0000500", "-0000500"));
         bPassed &= "0".equals(BigNumberCalculator.addOrNull("-0000001", "0000001"));
 
@@ -467,11 +423,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 정규화 포함 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 정규화(선행 0, -0) 포함 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -487,7 +438,6 @@ public class Main {
         bPassed &= "-1".equals(BigNumberCalculator.subtractOrNull("0", "0001"));
         bPassed &= "1".equals(BigNumberCalculator.subtractOrNull("0001", "-0"));
 
-        // zero by self-subtraction with leading zeros
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("0000500", "0000500"));
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("-0000500", "-0000500"));
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("-0000001", "-0000001"));
@@ -498,11 +448,6 @@ public class Main {
             System.out.println("2.4 subtractOrNull() — 정규화 포함 검증 FAIL");
         }
 
-
-        // =========================================================
-        // 2.3 addOrNull() — 상위 자릿수까지 영향을 미치는 덧셈 검증
-        // =========================================================
-
         bPassed = true;
 
         bPassed &= "1000000".equals(BigNumberCalculator.addOrNull("999999", "1"));
@@ -512,7 +457,6 @@ public class Main {
         bPassed &= "100000000000000000000000000000000000000000000000000".equals(BigNumberCalculator.addOrNull("99999999999999999999999999999999999999999999999999", "1"));
         bPassed &= "100000000000000000000000000000000000000000000000001".equals(BigNumberCalculator.addOrNull("99999999999999999999999999999999999999999999999999", "2"));
 
-        // carry chain with negative boundary
         bPassed &= "-1000000".equals(BigNumberCalculator.addOrNull("-999999", "-1"));
         bPassed &= "-1000000000".equals(BigNumberCalculator.addOrNull("-999999999", "-1"));
 
@@ -521,11 +465,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 상위 자릿수 영향 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 상위 자릿수까지 영향을 미치는 뺄셈 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -536,7 +475,6 @@ public class Main {
         bPassed &= "99999999999999999999999999999999999999999999999999".equals(BigNumberCalculator.subtractOrNull("100000000000000000000000000000000000000000000000000", "1"));
         bPassed &= "99999999999999999999999999999999999999999999999998".equals(BigNumberCalculator.subtractOrNull("100000000000000000000000000000000000000000000000000", "2"));
 
-        // borrow chain producing negative result
         bPassed &= "-999999".equals(BigNumberCalculator.subtractOrNull("0", "999999"));
         bPassed &= "-999999999".equals(BigNumberCalculator.subtractOrNull("0", "999999999"));
 
@@ -545,11 +483,6 @@ public class Main {
         } else {
             System.out.println("2.4 subtractOrNull() — 상위 자릿수 영향 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.3 addOrNull() — 큰 수(Big) 검증 (자리수 매우 큼)
-        // =========================================================
 
         bPassed = true;
 
@@ -560,7 +493,6 @@ public class Main {
         bPassed &= "-999999999999999999999999999999999999998".equals(BigNumberCalculator.addOrNull("-999999999999999999999999999999999999999", "1"));
         bPassed &= "-1000000000000000000000000000000000000000".equals(BigNumberCalculator.addOrNull("-999999999999999999999999999999999999999", "-1"));
 
-        // large cancellation to zero
         bPassed &= "0".equals(BigNumberCalculator.addOrNull("500000000000000000000000000000000000000", "-500000000000000000000000000000000000000"));
 
         if (bPassed) {
@@ -568,11 +500,6 @@ public class Main {
         } else {
             System.out.println("2.3 addOrNull() — 큰 수 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.4 subtractOrNull() — 큰 수(Big) 검증 (자리수 매우 큼)
-        // =========================================================
 
         bPassed = true;
 
@@ -583,7 +510,6 @@ public class Main {
         bPassed &= "1000000000000000000000000000000000000000".equals(BigNumberCalculator.subtractOrNull("999999999999999999999999999999999999999", "-1"));
         bPassed &= "-1000000000000000000000000000000000000000".equals(BigNumberCalculator.subtractOrNull("-999999999999999999999999999999999999999", "1"));
 
-        // large self-subtraction to zero
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("500000000000000000000000000000000000000", "500000000000000000000000000000000000000"));
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("-500000000000000000000000000000000000000", "-500000000000000000000000000000000000000"));
 
@@ -592,11 +518,6 @@ public class Main {
         } else {
             System.out.println("2.4 subtractOrNull() — 큰 수 검증 FAIL");
         }
-
-
-        // =========================================================
-        // 2.3/2.4 — 교차 검증(덧셈/뺄셈 결과 일관성) 검증
-        // =========================================================
 
         bPassed = true;
 
@@ -607,7 +528,6 @@ public class Main {
         bPassed &= "0".equals(BigNumberCalculator.addOrNull("999999999999999999999", "-999999999999999999999"));
         bPassed &= "0".equals(BigNumberCalculator.subtractOrNull("999999999999999999999", "999999999999999999999"));
 
-        // identity checks: a + b - b == a, a - b + b == a
         bPassed &= "123456789".equals(BigNumberCalculator.subtractOrNull(BigNumberCalculator.addOrNull("123456789", "987654321"), "987654321"));
         bPassed &= "-123456789".equals(BigNumberCalculator.addOrNull(BigNumberCalculator.subtractOrNull("-123456789", "987654321"), "987654321"));
 
