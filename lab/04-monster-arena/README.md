@@ -21,12 +21,14 @@
 
 ## 1. 프로젝트를 준비한다
 
-1. IntelliJ에서 `MonsterArena` 프로젝트를 생성한다.
-2. `monsterarena` 패키지를 생성한다.
-3. `monsterarena` 패키지에 `ElementType` 열거형(enum)을 정의한다.
-4. `monsterarena` 패키지에 `Monster` 클래스를 정의한다.
-5. `monsterarena` 패키지에 `Arena` 클래스를 정의한다.
-6. `monsterarena` 패키지에 `Main` 클래스를 정의한다.
+1. IntelliJ에서 `java-labs` 프로젝트를 연다.
+2. `04-monster-arena` 디렉터리로 이동한다.
+3. `04-monster-arena` 디렉터리 아래에 `src/main/java` 디렉터리를 생성한다.
+4. `src/main/java` 디렉터리 아래에 `com.example.monsterarena` 패키지를 생성한다.
+5. `com.example.monsterarena` 패키지에 `ElementType` 열거형(enum)을 정의한다.
+6. `com.example.monsterarena` 패키지에 `Monster` 클래스를 정의한다.
+7. `com.example.monsterarena` 패키지에 `Arena` 클래스를 정의한다.
+8. `com.example.monsterarena` 패키지에 `Main` 클래스를 정의한다.
 
 ## 2. 게임을 구현한다
 
@@ -133,13 +135,36 @@ monster3.attack(monster1); // monster1의 health는 77이 된다.
 
 #### 2.3.1. `loadMonsters` 메서드를 구현한다
 
-- `loadMonsters` 메서드는 `.csv` 파일로부터 몬스터들을 읽어 경기장에 추가할 때 사용한다.
+- `loadMonsters` 메서드는 `.csv` 형식 파일로부터 몬스터들을 순서대로 읽어 경기장에 추가할 때 사용한다.
 
 - 이 메서드는 유일한 인자로 `String filePath`를 받는다.
+> 
+> - `loadMonsters` 메서드는 파일 시스템의 절대 경로를 직접 사용하지 않는다.
+>     - `filePath`에 해당하는 클래스패스(classpath) 리소스를 다음과 같은 방식으로 읽는다:
+> 
+> ```java
+> InputStream inputStream = Arena.class.getClassLoader().getResourceAsStream(filePath);
+> ```
+> 
+> - 이때 filePath는 프로젝트 루트 기준의 상대 경로가 아니라 `src/main/resources` 디렉터리를 기준으로 한 리소스 경로를 의미한다.
+> 
+> - 예를 들어 실제 파일이 다음 위치에 존재할 경우:
+> 
+> ```
+> src/main/resources/datas/monsters_case01_example_full.txt
+> ```
+> 
+> - loadMonsters 메서드에 전달해야 하는 문자열은 다음과 같다:
+> 
+> ```
+> "datas/monsters_case01_example_full.txt"
+> ```
+> 
+> - `src/main/resources`는 빌드 시 클래스패스의 루트로 포함되며 따라서 코드에서는 해당 디렉터리를 기준으로 상대 경로를 지정한다.
 
 - 이 메서드는 반환값을 가지지 않는다.
 
-- `.csv` 파일의 각 줄은 몬스터 하나의 정보를 담고 있으며, 각 줄의 포맷은 다음과 같다:
+- `.csv` 형식 파일의 각 줄은 몬스터 하나의 정보를 담고 있으며 각 줄의 포맷은 다음과 같다:
     - `Name,ElementType,Health,AttackStat,DefenseStat`
 
 ```
@@ -153,15 +178,13 @@ MyMonster1,EARTH,100,20,10
     - 공격력: `20`
     - 방어력: `10`
 
-- 이 메서드는 `.csv` 파일에서 몬스터들을 순서대로 읽어 경기장에 추가한다.
-
 - 이 메서드를 호출하면 기존의 경기장 상태를 모두 초기화한 후 파일의 내용으로 몬스터를 다시 로드한다.
 
 - 경기장이 수용 인원(`capacity`)에 도달한 경우 남은 몬스터는 추가하지 않는다.
 
 ```java
 /*
-monsters.csv
+datas/monsters.csv
 MyMonster1,EARTH,100,20,10
 MyMonster2,WATER,40,2,1
 MyMonster3,WIND,44,15,10
@@ -171,12 +194,12 @@ MyMonster6,WIND,51,3,3
 */
 
 Arena arena = new Arena("5 Free For All", 5);
-arena.loadMonsters("C://Some/Path/To/CSV/monsters.csv");
+arena.loadMonsters("datas/monsters.csv");
 
 // MyMonster1부터 MyMonster5까지 총 5마리가 경기장에 추가된다.
 ```
 
-- `.csv` 파일의 데이터는 언제나 올바르다고 가정한다. (누락된 값이 없고, 정수 값이 올바르며, 속성 값이 유효함)
+- `.csv` 형식 파일의 데이터는 언제나 올바르다고 가정한다. (누락된 값이 없고, 정수 값이 올바르며, 속성 값이 유효함)
 
 #### 2.3.2. `goToNextTurn` 메서드를 구현한다
 
@@ -208,7 +231,7 @@ monster6은 monster1을 공격한다.
 
 ```java
 /*
-monsters.csv
+datas/monsters.csv
 MyMonster1,EARTH,100,20,10
 MyMonster2,WATER,40,2,1
 MyMonster3,WIND,44,15,10
@@ -218,7 +241,7 @@ MyMonster6,WIND,51,3,3
 */
 
 Arena arena = new Arena("Fun Arena", 6);
-arena.loadMonsters("C://Some/Path/To/CSV/monsters.csv");
+arena.loadMonsters("datas/monsters.csv");
 
 arena.goToNextTurn();
 arena.goToNextTurn();
@@ -247,14 +270,14 @@ arena.goToNextTurn();
 
 ```java
 /*
-monsters.csv
+datas/monsters.csv
 MonsterA,FIRE,30,5,1
 MonsterB,WATER,50,4,2
 MonsterC,EARTH,40,6,3
 */
 
 Arena arena = new Arena("Test Arena", 3);
-arena.loadMonsters("monsters.csv");
+arena.loadMonsters("datas/monsters.csv");
 
 Monster healthiestMonster = arena.getHealthiestOrNull();
 // healthiestMonster는 MonsterB를 가리킨다.
@@ -264,42 +287,46 @@ Monster healthiestMonster = arena.getHealthiestOrNull();
 
 ### 3.1 테스트 데이터 다운로드 및 위치
 
-테스트를 위해 [datas.zip](./datas.zip) 파일을 다운로드한 후 프로젝트 루트 디렉터리에서 압축을 해제하여 `datas/` 디렉터리를 생성해야 한다.
+테스트를 위해 [datas.zip](./datas.zip) 파일을 다운로드한 후 `src/main/resources` 디렉터리에서 압축을 해제하여 `datas/` 디렉터리를 생성해야 한다.
 
 압축 해제 후 프로젝트 구조는 다음과 같아야 한다:
 
 ```
-MonsterArena/
-├─ src/
-│  └─ monsterarena/
-│     ├─ Main.java
-│     ├─ Arena.java
-│     ├─ Monster.java
-│     └─ ElementType.java
-├─ datas/
-│  ├─ monsters_case01_example_full.txt
-│  ├─ monsters_case02_empty.txt
-│  ├─ monsters_case03_single.txt
-│  ├─ monsters_case04_two.txt
-│  ├─ monsters_case05_six_capacity_stress.txt
-│  ├─ monsters_case06_tie_healthiest.txt
-│  ├─ monsters_case07_ring3.txt
-│  ├─ monsters_case08_remove_timing.txt
-└─ MonsterArena.iml
+java-labs/
+ ├─ .gradle/
+ ├─ .idea/
+ ├─ ...
+ ├─ 04-monster-arena/
+   ├─ build/
+   ├─ src/
+     ├─ main/
+       ├─ java/
+       ├─ resources/
+         ├─ datas/
+           ├─ monsters_case01_example_full.txt
+           ├─ monsters_case02_empty.txt
+           ├─ monsters_case03_single.txt
+           ├─ monsters_case04_two.txt
+           ├─ monsters_case05_six_capacity_stress.txt
+           ├─ monsters_case06_tie_healthiest.txt
+           ├─ monsters_case07_ring3.txt
+           ├─ monsters_case08_remove_timing.txt
+ ├─ ...
 ```
 
 ### 3.2. 테스트용 `Main` 클래스 수정
 
-- 프로젝트의 `Main` 클래스를 아래의 예처럼 수정한다.
+- `Main` 클래스를 아래의 예처럼 수정하고 실행한다.
 
 ```java
-package monsterarena;
+package com.example.monsterarena;
 
 public class Main {
     private static int totalChecks = 0;
     private static int passedChecks = 0;
     private static int roundPrintCounter = 0;
 
+    private static final String NOT_EXIST_FILE = "datas/this_file_should_not_exist.txt";
     private static final String FILE_CASE01_EXAMPLE_FULL = "datas/monsters_case01_example_full.txt";
     private static final String FILE_CASE02_EMPTY = "datas/monsters_case02_empty.txt";
     private static final String FILE_CASE03_SINGLE = "datas/monsters_case03_single.txt";
@@ -346,7 +373,7 @@ public class Main {
         bPassed &= check(arena.getArenaName().equals("MissingFileArena"), "arenaName is preserved");
         bPassed &= check(arena.getCapacity() == 8, "capacity is preserved");
 
-        arena.loadMonsters("this_file_should_not_exist_12345.txt");
+        arena.loadMonsters(NOT_EXIST_FILE);
 
         bPassed &= check(arena.getMonsterCount() == 0, "monsterCount == 0 when file missing");
         bPassed &= check(arena.getTurns() == 0, "turns == 0 when file missing");
@@ -566,10 +593,8 @@ public class Main {
             }
 
             bPassed &= check(arena.getTurns() == beforeTurns + 1, "turns == " + t);
-            bPassed &= check(arena.getMonsterCount() == 0 || arena.getMonsterCount() == 3,
-                    "monsterCount is 3 until simultaneous wipe, or 0 after wipe");
-            bPassed &= check(arena.getMonsterCount() == 0 || arena.getHealthiestOrNull() != null,
-                    "non-empty => healthiest not null");
+            bPassed &= check(arena.getMonsterCount() == 0 || arena.getMonsterCount() == 3, "monsterCount is 3 until simultaneous wipe, or 0 after wipe");
+            bPassed &= check(arena.getMonsterCount() == 0 || arena.getHealthiestOrNull() != null, "non-empty => healthiest not null");
 
             if (arena.getMonsterCount() > 0) {
                 bPassed &= check(arena.getHealthiestOrNull().getName().equals("A"), "symmetry => healthiest remains first (A)");
