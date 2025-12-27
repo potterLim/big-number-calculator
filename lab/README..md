@@ -24,13 +24,13 @@
 
 ## Java 실습 목록
 
-| 번호 | 제목                  | 경로                                                      |
-| :--  | :-------------------- | :-------------------------------------------------------- |
-|  01  | Big Number Calculator | [`01-big-number-calculator`](./01-big-number-calculator/) |
-|  02  | Expression Evaluator  | [`02-expression-evaluator`](./02-expression-evaluator/)   |
-|  03  | TODO Analyzer         | [`03-todo-analyzer`](./03-todo-analyzer/)                 |
-|  04  | Monster Arena         | [`04-monster-arena`](./04-monster-arena/)                 |
-|  05  | Data Structures       | [`05-data-structures`](./05-data-structures/)             |
+| 번호 | 제목                   | 경로                                                        |
+| :--  | :--------------------- | :---------------------------------------------------------- |
+|  01  | Big Number Calculator  | [`01-big-number-calculator`](./01-big-number-calculator/)   |
+|  02  | Expression Evaluator   | [`02-expression-evaluator`](./02-expression-evaluator/)     |
+|  03  | TODO Analyzer          | [`03-todo-analyzer`](./03-todo-analyzer/)                   |
+|  04  | Monster Arena          | [`04-monster-arena`](./04-monster-arena/)                   |
+|  05  | Data Structures Runner | [`05-data-structures-runner`](./05-data-structures-runner/) |
 
 각 실습 디렉터리에는 과제 설명(`README.md`), 기본 코드 구조, 실행 및 테스트 방법이 포함되어 있다.
 
@@ -123,7 +123,7 @@ java-labs/
 - `02-expression-evaluator`
 - `03-todo-analyzer`
 - `04-monster-arena`
-- `05-data-structures`
+- `05-data-structures-runner`
 
 생성 후 구조:
 
@@ -135,7 +135,7 @@ java-labs/
  ├─ 02-expression-evaluator/
  ├─ 03-todo-analyzer/
  ├─ 04-monster-arena/
- ├─ 05-data-structures/
+ ├─ 05-data-structures-runner/
  ├─ gradle/
  ├─ .gitignore
  ├─ build.gradle
@@ -155,7 +155,7 @@ include '01-big-number-calculator'
 include '02-expression-evaluator'
 include '03-todo-analyzer'
 include '04-monster-arena'
-include '05-data-structures'
+include '05-data-structures-runner'
 ```
 
 #### 2.3. 루트 build.gradle 공통 설정 작성
@@ -190,7 +190,7 @@ subprojects {
 - `02-expression-evaluator/build.gradle`
 - `03-todo-analyzer/build.gradle`
 - `04-monster-arena/build.gradle`
-- `05-data-structures`
+- `05-data-structures-runner`
 
 이 단계에서는 파일 내용은 비워 둔다.
 
